@@ -1,44 +1,27 @@
-// const person: {
-//   name: string;
-//   age: number;
-//   hobbies: string[];
-//   role: [number, string]; //tuple
-// } = {
-//   name: 'Mary',
-//   age: 30,
-//   hobbies: ['running', 'reading'],
-//   role: [2, 'author'],
-// };
-
-// const ADMIN = 0;
-// const READ_ONLY = 1;
-// const AUTHOR = 2;
-
-// instead of above, we can use enum
-
-enum Role {
-  ADMIN,
-  READ_ONLY,
-  AUTHOR,
-}
-
-// ADMIN is given a value of 0, READ_ONLY a value of 1, and AUTHOR a value of 2
-
-const person = {
-  name: 'Mary',
-  age: 30,
-  hobbies: ['running', 'reading'],
-  role: Role.ADMIN,
+const add = (n1: number, n2: number): number => {
+  return n1 + n2;
 };
 
-let favoriteActivites: any[];
+const printResult = (num: number) => {
+  // returns "void" because there is no return
+  console.log('Result: ' + num);
+};
 
-// console.log(person);
+const addAndHandle = (n1: number, n2: number, cb: (num: number) => void) => {
+  const result = n1 + n2;
+  cb(result);
+};
 
-// for (const hobby of person.hobbies) {
-//   console.log(hobby.toUpperCase());
-// }
+printResult(add(5, 12));
 
-if (person.role === Role.ADMIN) {
-  console.log('is admin', Role.ADMIN);
-}
+// this says that combineValues can be a function that takes two numbers as parameters and returns a number
+let combineValues: (a: number, b: number) => number;
+
+combineValues = add;
+// combineValues = printResult; does not work because it doesn't match the signature above
+
+console.log(combineValues(8, 8));
+
+addAndHandle(10, 20, result => {
+  console.log(result);
+});
